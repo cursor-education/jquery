@@ -349,9 +349,38 @@ deferred.reject()
 ---
 ##jQuery Promises
 
-Promise is an object to observe when all actions of a certain type bound to the collection, queued or not, have finished.
+Promise is an object to observe when all actions of a certain type bound to the collection, queued or not, have finished. All ajax requests return promices
 
-All ajax requests return promices
+```javascript
+$( "button" ).on( "click", function() {
+  $( "p" ).append( "Started..." );
+
+  $( "div" ).each(function( i ) {
+    $( this ).fadeIn().fadeOut( 1000 * ( i + 1 ) );
+  });
+
+  $( "div" ).promise().done(function() {
+    $( "p" ).append( " Finished! " );
+  });
+});
+```
+
+---
+##jQuery Promises
+
+```javascript
+var effect = function() {
+  return $( "div" ).fadeIn( 800 ).delay( 1200 ).fadeOut();
+};
+
+$( "button" ).on( "click", function() {
+  $( "p" ).append( " Started... " );
+
+  $.when( effect() ).done(function() {
+    $( "p" ).append( " Finished! " );
+  });
+});
+```
 
 ---
 ##Resources
